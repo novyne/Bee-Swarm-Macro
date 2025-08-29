@@ -11,7 +11,16 @@ class Keyset:
 
     def execute(self):
         for instruction in self.instructions:
-            pg.press(instruction[0], interval=instruction[1])
+            if instruction[0] == '':
+                time.sleep(instruction[1])
+                continue
+            if instruction[1] == 0:
+                pg.press(instruction[0])
+                continue
+
+            pg.keyDown(instruction[0])
+            time.sleep(instruction[1])
+            pg.keyUp(instruction[0])
     
     @classmethod
     def from_list(cls, instructions: list[tuple[str, float]]):
@@ -30,4 +39,20 @@ class InstantKeyset:
         pg.press(self.instructions)
 
 
-RESET = InstantKeyset('esc', 'r', 'enter')
+RESET = Keyset(('esc', 0), ('r', 0), ('enter', 0), ('', 5))
+
+TO_RED_CANNON = Keyset(
+    *RESET.instructions,
+    ('o', 0),
+    ('o', 0),
+    ('o', 0),
+    ('o', 0),
+    ('w', 3),
+    ('d', 6),
+    ('space', 0),
+    ('d', 0.5),
+    ('w', 0.25),
+    ('d', 0.25),
+    ('s', 0.25),
+    ('e', 0)
+)
