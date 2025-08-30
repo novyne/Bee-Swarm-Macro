@@ -39,7 +39,7 @@ class InstantKeyset:
         pg.press(self.instructions)
 
 
-RESET = Keyset(('esc', 0), ('r', 0), ('enter', 0), ('', 5))
+RESET = Keyset(('esc', 0), ('r', 0), ('enter', 0), ('', 6))
 
 TO_RED_CANNON = Keyset(
     *RESET.instructions,
